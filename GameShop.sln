@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShop", "GameShop\GameShop.csproj", "{3C08D250-D540-4AD1-A1A0-EAF519FF224F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShopModel", "GameShopModel\GameShopModel.csproj", "{5FACC367-4C44-402F-8325-CF092D02B934}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C08D250-D540-4AD1-A1A0-EAF519FF224F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C08D250-D540-4AD1-A1A0-EAF519FF224F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C08D250-D540-4AD1-A1A0-EAF519FF224F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C08D250-D540-4AD1-A1A0-EAF519FF224F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FACC367-4C44-402F-8325-CF092D02B934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FACC367-4C44-402F-8325-CF092D02B934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FACC367-4C44-402F-8325-CF092D02B934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FACC367-4C44-402F-8325-CF092D02B934}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F13FEF3-493E-41B0-B8C4-E8F6E673CC15}
+	EndGlobalSection
+EndGlobal
