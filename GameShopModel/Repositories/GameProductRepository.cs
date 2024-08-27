@@ -39,7 +39,7 @@ public class GameProductRepository(GameShopContext gameShopContext) : IGameProdu
                 .SetProperty(
                     editingGameProduct => editingGameProduct.ReleaseDate, gameProduct => gameProduct.ReleaseDate)
                 .SetProperty(
-                    editingGameProduct => editingGameProduct.Genre, gameProduct => gameProduct.Genre)
+                    editingGameProduct => editingGameProduct.Genres, gameProduct => gameProduct.Genres)
                 .SetProperty(
-                    editingGameProduct => editingGameProduct.ImagesUrl, gameProduct => gameProduct.ImagesUrl));
+                    editingGameProduct => editingGameProduct.Images, gameProduct => gameProduct.Images));
 }

@@ -1,0 +1,16 @@
+﻿@using GameShopModel.Entities
+@model IEnumerable<GameProduct>
+
+@foreach (var gameProduct in Model)
+{
+    <div class="card-body">
+        <img src="@gameProduct.PresentationImageUrl" class="card-img-top" alt="@gameProduct.Title">
+        <div class="text-section">
+            <h5 class="card-title fw-bold">@gameProduct.Title</h5>
+        </div>
+        <div class="cta-section">
+            <div>@gameProduct.Price</div>
+            <a asp-controller="Cart" asp-action="Delete" asp-route-id="@gameProduct.Id" type="button" class="btn btn-danger">Удалить</a>
+        </div>
+    </div>
+}

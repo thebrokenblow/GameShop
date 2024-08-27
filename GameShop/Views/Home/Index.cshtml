@@ -1,20 +1,23 @@
-﻿@using GameShopModel.Entities
+﻿@using GameShop.Extensions
+@using GameShopModel.Entities
 
 @model List<GameProduct>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6 col-lg-4">
-            @foreach (var gameProduct in Model)
-            {
-                <div class="card" style="width: 18rem;">
+<div class="container mt-5">
+    <div class="row row-cols-4">
+        @foreach (var gameProduct in Model)
+        {
+            <div class="card" style="width: 18rem;">
+                <a asp-controller="Game" asp-action="Details" asp-route-id="@gameProduct.Id" style="text-decoration: inherit; color: inherit">
                     <img src="@gameProduct.PresentationImageUrl" class="card-img-top" alt="@gameProduct.Title">
                     <div class="card-body">
                         <h5 class="card-title">@gameProduct.Title</h5>
-                        <a href="#" class="btn btn-primary">Купить</a>
+                        <p class="card-text">@gameProduct.Description.Truncate(60)...</p>
+                        <p class="card-text">@gameProduct.Price ₽</p>
+                        <a class="btn btn-primary mt-2">Купить</a>
                     </div>
-                </div>
-            }
-        </div>
+                </a>
+            </div>
+        }
     </div>
 </div>

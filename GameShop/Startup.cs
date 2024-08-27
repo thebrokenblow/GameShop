@@ -2,18 +2,21 @@
 using GameShopModel.Repositories.Interfaces;
 using GameShopModel.Repositories;
 using Microsoft.EntityFrameworkCore;
+using GameShop.Repository.Interfaces;
+using GameShop.Repository;
 
 namespace GameShop;
 
-public class Startup
+public class Startup(IConfiguration configuration)
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        //services.AddTransient<IGameProductRepository, GameProductRepository>();
-        //services.AddControllersWithViews();
-        //services.AddDbContext<GameShopContext>(options =>
-        //        options.UseSqlServer(builder.Configuration.GetConnectionString("GameShopContext") ??
-        //        throw new InvalidOperationException("Connection string 'GameShopContext' not found.")));
+        services.AddTransient<IGameProductRepository, GameProductRepository>();
+        services.AddSingleton<IRepositoryCart, RepositoryCart>();
+        services.AddControllersWithViews();
+        services.AddDbContext<GameShopContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("GameShopContext") ??
+                throw new InvalidOperationException("Connection string 'GameShopContext' not found.")));
     }
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
