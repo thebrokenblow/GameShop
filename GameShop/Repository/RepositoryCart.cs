@@ -1,11 +1,14 @@
 ﻿using GameShop.Repository.Interfaces;
 using GameShopModel.Entities;
+using System.Linq;
 
 namespace GameShop.Repository;
 
 public class RepositoryCart : IRepositoryCart
 {
     private readonly List<GameProduct> gameProducts = [];
+
+    public decimal SumProduct => gameProducts.Sum(gameProduct => gameProduct.Price);
 
     public void Add(GameProduct gameProduct)
     {
@@ -14,10 +17,13 @@ public class RepositoryCart : IRepositoryCart
 
     public void Delete(int id)
     {
-        var gameProduct = gameProducts.First(x => x.Id == id);
-        gameProducts.Remove(gameProduct);
+        var deletingGameProducts = gameProducts.First(gameProduct => gameProduct.Id == id);
+        gameProducts.Remove(deletingGameProducts);
     }
 
     public IEnumerable<GameProduct> GetProducts() =>
         gameProducts;
+
+    public void Clear() =>
+        gameProducts.Clear();
 }

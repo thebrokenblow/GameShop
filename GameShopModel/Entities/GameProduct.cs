@@ -11,6 +11,7 @@ public class GameProduct
     public required List<Genre> Genres { get; set; }
     public required List<Image> Images { get; set; }
     public required List<Video> Videos { get; set; }
+    public required List<Cart> Carts { get; set; }
     public required MinimumSystemRequirement MinimumSystemRequirement { get; set; }
     public required RecommendedSystemRequirement? RecommendedSystemRequirement { get; set; }
 }

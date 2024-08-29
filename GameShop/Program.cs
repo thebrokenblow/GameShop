@@ -1,6 +1,8 @@
 using GameShop;
 
-CreateHostBuilder(args).Build().Run();
+var hostBuilder = CreateHostBuilder(args);
+var host = hostBuilder.Build();
+host.Run();
 
 static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)

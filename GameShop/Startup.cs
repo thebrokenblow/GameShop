@@ -4,6 +4,9 @@ using GameShopModel.Repositories;
 using Microsoft.EntityFrameworkCore;
 using GameShop.Repository.Interfaces;
 using GameShop.Repository;
+using GameShopModel.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace GameShop;
 
@@ -17,6 +20,12 @@ public class Startup(IConfiguration configuration)
         services.AddDbContext<GameShopContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("GameShopContext") ??
                 throw new InvalidOperationException("Connection string 'GameShopContext' not found.")));
+
+        services.AddIdentity<User, IdentityRole>()
+            .AddEntityFrameworkStores<GameShopContext>();
+        services.AddMemoryCache();
+        services.AddSession();
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
     }
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
@@ -28,5 +37,6 @@ public class Startup(IConfiguration configuration)
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
         });
+        //Seed.SeedUsersAndRolesAsync(app);
     }
 }

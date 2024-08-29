@@ -4,6 +4,7 @@ using GameShopModel.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameShopModel.Migrations
 {
     [DbContext(typeof(GameShopContext))]
-    partial class GameShopContextModelSnapshot : ModelSnapshot
+    [Migration("20240829102954_UserAndCart")]
+    partial class UserAndCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace GameShopModel.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CartGameProduct", b =>
-                {
-                    b.Property<int>("CartsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GameProductsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CartsId", "GameProductsId");
-
-                    b.HasIndex("GameProductsId");
-
-                    b.ToTable("CartGameProduct");
-                });
 
             modelBuilder.Entity("GameProductGenre", b =>
                 {
@@ -81,6 +69,9 @@ namespace GameShopModel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CartId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -106,6 +97,8 @@ namespace GameShopModel.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CartId");
 
                     b.HasIndex("MinimumSystemRequirementId");
 
@@ -481,21 +474,6 @@ namespace GameShopModel.Migrations
                     b.HasDiscriminator().HasValue("User");
                 });
 
-            modelBuilder.Entity("CartGameProduct", b =>
-                {
-                    b.HasOne("GameShopModel.Entities.Cart", null)
-                        .WithMany()
-                        .HasForeignKey("CartsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GameShopModel.Entities.GameProduct", null)
-                        .WithMany()
-                        .HasForeignKey("GameProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("GameProductGenre", b =>
                 {
                     b.HasOne("GameShopModel.Entities.GameProduct", null)
@@ -522,6 +500,10 @@ namespace GameShopModel.Migrations
 
             modelBuilder.Entity("GameShopModel.Entities.GameProduct", b =>
                 {
+                    b.HasOne("GameShopModel.Entities.Cart", null)
+                        .WithMany("GameProducts")
+                        .HasForeignKey("CartId");
+
                     b.HasOne("GameShopModel.Entities.MinimumSystemRequirement", "MinimumSystemRequirement")
                         .WithMany()
                         .HasForeignKey("MinimumSystemRequirementId")
@@ -600,6 +582,11 @@ namespace GameShopModel.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GameShopModel.Entities.Cart", b =>
+                {
+                    b.Navigation("GameProducts");
                 });
 
             modelBuilder.Entity("GameShopModel.Entities.GameProduct", b =>
